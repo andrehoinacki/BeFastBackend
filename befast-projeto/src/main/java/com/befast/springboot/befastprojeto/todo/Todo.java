@@ -2,6 +2,7 @@ package com.befast.springboot.befastprojeto.todo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,13 +12,20 @@ public class Todo {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="id")
 	private Long id;
 	
+	@Column(name="username")
 	private String username;
-	private String description;
-	private Date targetDate;
-	private boolean isDone;
 	
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="target_date")
+	private Date targetDate;
+	
+	@Column(name="is_done")
+	private boolean isDone;
 	protected Todo() {
 		
 	}
