@@ -46,12 +46,14 @@ public class JwtAuthenticationRestController {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-		final UserDetails userDetails = jwtInMemoryUserDetailsService
+		final JwtUserDetails userDetails = (JwtUserDetails) jwtInMemoryUserDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(new JwtTokenResponse(token));
+		userDetails.setToken(token);
+
+		return ResponseEntity.ok(userDetails);
 	}
 
 	@RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)

@@ -1,4 +1,5 @@
 package com.befast.springboot.befastprojeto.jwt;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.befast.springboot.befastprojeto.user.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class JwtUserDetails implements UserDetails {
@@ -16,17 +18,28 @@ public class JwtUserDetails implements UserDetails {
 	private final Long id;
 	private final String username;
 	private final String password;
-	private final Collection<? extends GrantedAuthority> authorities;
+	private final String role;
+	private String token = null;
+	// private final Collection<? extends GrantedAuthority> authorities;
 
 	public JwtUserDetails(Long id, String username, String password, String role) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.role = role;
 
-		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(role));
+		// List<SimpleGrantedAuthority> authorities = new
+		// ArrayList<SimpleGrantedAuthority>();
+		// authorities.add(new SimpleGrantedAuthority(roles));
 
-		this.authorities = authorities;
+		// this.authorities = authorities;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
 	}
 
 	@JsonIgnore
@@ -65,12 +78,27 @@ public class JwtUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+	//	return authorities;
+		return null;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

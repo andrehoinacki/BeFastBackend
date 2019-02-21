@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.befast.springboot.befastprojeto.user.User;
-import com.befast.springboot.befastprojeto.user.UserController;
+import com.befast.springboot.befastprojeto.user.UsuarioController;
+import com.befast.springboot.befastprojeto.user.Usuario;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,7 +21,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
 		
 	@Autowired
-	private UserController userController;
+	private UsuarioController userController;
 	
 	List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
@@ -38,15 +38,15 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {		
-		User usuario = null;
-		List<User> users = userController.getAllUsers(username);		
+		Usuario usuario = null;
+		List<Usuario> users = userController.getAllUsers(username);		
 		if (users != null && !users.isEmpty()) {
 			usuario = users.get(0);			
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedString = encoder.encode(usuario.getPassword());
 			encodedString = encoder.encode(usuario.getPassword());			
 			inMemoryUserList.add(new JwtUserDetails(usuario.getId(), usuario.getUsername(),
-					encodedString, "ROLE_USER"));
+					encodedString, usuario.getRole().getNome()));
 		}		
 		
 				

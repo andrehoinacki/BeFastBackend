@@ -52,6 +52,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+
 		httpSecurity.csrf().disable().exceptionHandling()
 				.authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().anyRequest()
@@ -61,6 +62,16 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		httpSecurity.headers().frameOptions().sameOrigin() // H2 Console Needs this setting
 				.cacheControl(); // disable caching
+
+		httpSecurity
+				.authorizeRequests().antMatchers("/todos/**").hasRole("ADMIN")
+				.and()
+				.authorizeRequests().antMatchers("/shipper/**").hasAnyRole("ADMIN","SHIPPER_ROOT","SHIPPER_UNIT")
+				.and()
+				.authorizeRequests().antMatchers("/authenticate/**").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/welcome/**").permitAll();
+
 	}
 
 	@Override

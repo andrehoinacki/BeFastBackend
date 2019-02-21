@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-public class UserController {
+public class UsuarioController {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsuarioRepository userRepository;
 		
-	public List<User> getAllUsers(String username) {
+	public List<Usuario> getAllUsers(String username) {
 		return userRepository.findByUsername(username);		
 	}
 	
-	public User getUser(String username, long id) {
+	public Usuario getUser(String username, long id) {
 		return userRepository.findById(id).get();		
 	}
 	
@@ -27,16 +27,16 @@ public class UserController {
 		
 	}
 		
-	public User updateUser(String username, long id, User user) {
+	public Usuario updateUser(String username, long id, Usuario user) {
 
-		User userUpdated = userRepository.save(user);
+		Usuario userUpdated = userRepository.save(user);
 
 		return userUpdated;
 	}
 	
-	public void createUser( String username, User user) {		
+	public void createUser( String username, Usuario user) {		
 		user.setUsername(username);
-		User createdTodo = userRepository.save(user);
+		Usuario createdTodo = userRepository.save(user);
 		
 	}
 
