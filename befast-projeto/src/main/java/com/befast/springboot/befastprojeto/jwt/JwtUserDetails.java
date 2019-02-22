@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.befast.springboot.befastprojeto.user.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class JwtUserDetails implements UserDetails {

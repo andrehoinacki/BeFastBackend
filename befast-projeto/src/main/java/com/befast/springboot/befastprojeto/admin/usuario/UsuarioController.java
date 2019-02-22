@@ -1,4 +1,4 @@
-package com.befast.springboot.befastprojeto.user;
+package com.befast.springboot.befastprojeto.admin.usuario;
 
 import java.util.List;
 

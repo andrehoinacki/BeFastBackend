@@ -1,7 +1,11 @@
 package com.befast.springboot.befastprojeto.jwt;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
+import com.befast.springboot.befastprojeto.admin.usuario.UsuarioController;
 
 //import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.befast.springboot.befastprojeto.user.UsuarioController;
-import com.befast.springboot.befastprojeto.user.Usuario;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

@@ -1,4 +1,4 @@
-package com.befast.springboot.befastprojeto.user;
+package com.befast.springboot.befastprojeto.admin.role;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
