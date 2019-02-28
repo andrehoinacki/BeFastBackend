@@ -31,7 +31,25 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping("/novo")
-	public Usuario updateTodo(@RequestBody Usuario usuario) throws Exception{
+	public Usuario createUsuario(@RequestBody Usuario usuario) throws Exception{
 		return usuarioService.save(usuario);
+	}
+
+	@GetMapping("/{id}")
+	public Usuario getUsuario(@PathVariable long id){
+		return usuarioService.findById(id);
+	}
+
+	@PutMapping("/edit")
+	public Usuario updateUsuario(@RequestBody Usuario usuario) throws Exception{
+		return usuarioService.save(usuario);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable long id){
+		
+		usuarioService.deleteById(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 }

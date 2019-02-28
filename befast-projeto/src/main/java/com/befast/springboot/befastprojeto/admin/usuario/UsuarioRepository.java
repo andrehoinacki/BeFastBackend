@@ -22,4 +22,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	@Query("SELECT u FROM Usuario u  WHERE u.username=:#{#usuario.username} ")
 	Usuario qryUniqueUsuario(Usuario usuario);
+
+	@Query("SELECT u FROM Usuario u  WHERE u.id=:#{#id} ")
+	Usuario findUsuarioById(long id);
 }

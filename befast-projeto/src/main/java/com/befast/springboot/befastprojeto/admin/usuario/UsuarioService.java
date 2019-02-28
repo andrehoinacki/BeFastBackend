@@ -1,5 +1,7 @@
 package com.befast.springboot.befastprojeto.admin.usuario;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +11,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	
 	public UsuarioPageResponse list(UsuarioFilter filter) {
 		PageRequest pageRequest = PageRequest.of(filter.getPageNumber() - 1, filter.getPageSize(),
 				new Sort(Sort.Direction.ASC, "nome"));
@@ -35,21 +35,19 @@ public class UsuarioService {
 		/**
 		 * Valida campos obrigatórios
 		 */
-		if(
-			usuario.getUsername() == null || 
-			usuario.getNome() == null     ||
-			usuario.getPassword() == null ||
-			usuario.getRole() == null
-		){
+		if (usuario.getUsername() == null || usuario.getNome() == null || usuario.getPassword() == null
+				|| usuario.getRole() == null) {
 			throw new Exception("ERROR_CAMPOS_OBRIGATORIOS");
 		}
-		
+
 		/**
 		 * Verifica se já não existe usuario com mesmo username
 		 */
-		Usuario unique = this.verifyUnique(usuario);
-		if(unique != null && !unique.getId().equals(usuario.getId())){
-			throw new Exception("ERROR_REGISTRO_DUPLICADO");
+		if (null == usuario.getId()) {
+			Usuario unique = this.verifyUnique(usuario);
+			if (unique != null && !unique.getId().equals(usuario.getId())) {
+				throw new Exception("ERROR_REGISTRO_DUPLICADO");
+			}
 		}
 
 		/**
@@ -59,11 +57,20 @@ public class UsuarioService {
 		return usuarioRepository.save(usuario);
 	}
 
-	public Usuario verifyUnique(Usuario usuario){
+	public Usuario verifyUnique(Usuario usuario) {
 		return usuarioRepository.qryUniqueUsuario(usuario);
 	}
 
 	private String generateCryptedPassword(String password) {
 		return BCrypt.hashpw(password, BCrypt.gensalt(4));
 	}
+
+	public Usuario findById(long id) {
+		return usuarioRepository.findUsuarioById(id);
+	}
+
+	public void deleteById(long id) {
+		usuarioRepository.deleteById(id);
+	}
+
 }
