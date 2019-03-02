@@ -1,1 +1,4 @@
 /befast-projeto/bin/src/main/java/com/befast/springboot/befastprojeto/jwt/*.class
+/befast-projeto/bin/src/main/java/com/befast/springboot/basic/auth/*.class
+/.vscode/launch.json
+/.vscode
