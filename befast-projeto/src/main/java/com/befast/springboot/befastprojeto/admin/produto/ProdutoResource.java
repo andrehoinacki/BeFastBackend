@@ -1,4 +1,4 @@
-package com.befast.springboot.befastprojeto.admin.usuario;
+package com.befast.springboot.befastprojeto.admin.produto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-@RequestMapping(value = "/admin/usuario")
-public class UsuarioResource {
+@RequestMapping(value = "/admin/produto")
+public class ProdutoResource {
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private ProdutoService produtoService;
 
 	@PostMapping("/list")
-	public UsuarioPageResponse getAll(@RequestBody UsuarioFilter filter) throws Exception{
-		return usuarioService.list(filter);
+	public ProdutoPageResponse getAll(@RequestBody ProdutoFilter filter) throws Exception{
+		return produtoService.list(filter);
 	}
 	
 	@PostMapping("/novo")
-	public Usuario createUsuario(@RequestBody Usuario usuario) throws Exception{
-		return usuarioService.save(usuario);
+	public Produto createProduto(@RequestBody Produto produto) throws Exception{
+		return produtoService.save(produto);
 	}
 
 	@GetMapping("/{id}")
-	public Usuario getUsuario(@PathVariable long id){
-		return usuarioService.findById(id);
+	public Produto getProduto(@PathVariable long id){
+		return produtoService.findById(id);
 	}
 
 	@PutMapping("/edit")
-	public Usuario updateUsuario(@RequestBody Usuario usuario) throws Exception{
-		return usuarioService.save(usuario);
+	public Produto updateProduto(@RequestBody Produto produto) throws Exception{
+		return produtoService.save(produto);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable long id){
 		
-		usuarioService.deleteById(id);
+		produtoService.deleteById(id);
 		
 		return ResponseEntity.noContent().build();
 	}

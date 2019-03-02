@@ -16,3 +16,13 @@ INSERT INTO `befast`.`role` (`id`, `nome`) VALUES ('4', 'ROLE_FUNCIONARIO');
 /** INSERT USUÁRIOS */
 INSERT INTO befast.usuario VALUES (1, "Administrador", "admin", "admin", 1);
 INSERT INTO befast.usuario VALUES (2, "Caixa", "caixa", "caixa", 4);
+
+/** INSERT CATEGORIAS */
+INSERT INTO `befast`.`categoria` (`id`, `nome`) VALUES ('1', 'Salgado');
+INSERT INTO `befast`.`categoria` (`id`, `nome`) VALUES ('2', 'Doce');
+INSERT INTO `befast`.`categoria` (`id`, `nome`) VALUES ('3', 'Bebida');
+
+/** INSERT RESTRIÇÕES */
+INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('1', 'LACTOSE');
+INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('2', 'GLUTEN');
+INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('3', 'CALORICA');
