@@ -31,6 +31,9 @@ public class Produto {
 	@Column(name="valor")
 	private Float valor;
 	
+	@Column(name="quantidade", columnDefinition="int default 0")
+	private Integer quantidade;
+	
 	@ManyToMany(fetch = FetchType.EAGER)	
 	@JoinColumn(name = "restricao_id", foreignKey = @ForeignKey(name="FK_PRODUTO_RESTRICAO"), insertable = true, updatable = true)
 	private List<Restricao> restricoes;
@@ -133,6 +136,20 @@ public class Produto {
 	 */
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	/**
+	 * @return the quantidade
+	 */
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	/**
+	 * @param quantidade the quantidade to set
+	 */
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 
 }

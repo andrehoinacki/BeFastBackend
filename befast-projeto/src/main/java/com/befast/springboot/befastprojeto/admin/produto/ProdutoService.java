@@ -33,7 +33,7 @@ public class ProdutoService {
 		 * Valida campos obrigatórios
 		 */
 		if (produto.getCodigo() == null || produto.getDescricao() == null || produto.getCategoria() == null
-				|| produto.getValor() == null) {
+				|| produto.getValor() == null || produto.getQuantidade() == null || produto.getQuantidade() <= 0) {
 			throw new Exception("ERROR_CAMPOS_OBRIGATORIOS");
 		}
 
