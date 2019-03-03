@@ -1,5 +1,7 @@
 package com.befast.springboot.befastprojeto.admin.usuario;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,8 +9,10 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.befast.springboot.befastprojeto.admin.restricao.Restricao;
 import com.befast.springboot.befastprojeto.admin.role.Role;
 
 @Entity
@@ -30,6 +34,16 @@ public class Usuario {
 	@ManyToOne(fetch = FetchType.EAGER)	
 	@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name="FK_USUARIO_ROLE"), insertable = true, updatable = true)
 	private Role role;
+	
+	@ManyToMany(fetch = FetchType.EAGER)	
+	@JoinColumn(name = "restricao_id", foreignKey = @ForeignKey(name="FK_USUARIO_RESTRICAO"), insertable = true, updatable = true)
+	private List<Restricao> restricoes;
+	
+	@Column(name="valor_calorico")
+	private Long ValorCalorico; 
+	
+	@Column(name="matricula")
+	private String matricula;
 
 	public Usuario() {
 		
@@ -109,6 +123,20 @@ public class Usuario {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	/**
+	 * @return the restricoes
+	 */
+	public List<Restricao> getRestricoes() {
+		return restricoes;
+	}
+
+	/**
+	 * @param restricoes the restricoes to set
+	 */
+	public void setRestricoes(List<Restricao> restricoes) {
+		this.restricoes = restricoes;
 	}
 
 }
