@@ -26,3 +26,10 @@ INSERT INTO `befast`.`categoria` (`id`, `nome`) VALUES ('3', 'Bebida');
 INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('1', 'LACTOSE');
 INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('2', 'GLUTEN');
 INSERT INTO `befast`.`restricao` (`id`, `nome`) VALUES ('3', 'CALORICA');
+
+/** INSERT FORMAS DE PAGAMENTO */
+INSERT INTO `befast`.`forma_pagamento` (`id`, `nome`) VALUES ('1', 'Dinheiro');
+INSERT INTO `befast`.`forma_pagamento` (`id`, `nome`) VALUES ('2', 'Carteirinha');
+INSERT INTO `befast`.`forma_pagamento` (`id`, `nome`) VALUES ('3', 'Cartão Débito');
+INSERT INTO `befast`.`forma_pagamento` (`id`, `nome`) VALUES ('4', 'Cartão Crédito');
+INSERT INTO `befast`.`forma_pagamento` (`id`, `nome`) VALUES ('5', 'Boleto');

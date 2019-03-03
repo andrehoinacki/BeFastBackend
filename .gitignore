@@ -3,3 +3,4 @@
 /.vscode/launch.json
 /.vscode
 /befast-projeto/bin/src/main/java/com/befast/springboot/befastprojeto/helloworld/*.class
+/befast-projeto/bin/src/main/java/com/befast/springboot/befastprojeto/todo/*.class
