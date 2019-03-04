@@ -139,4 +139,20 @@ public class Usuario {
 		this.restricoes = restricoes;
 	}
 
+	public Long getValorCalorico() {
+		return ValorCalorico;
+	}
+
+	public void setValorCalorico(Long valorCalorico) {
+		ValorCalorico = valorCalorico;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
 }
