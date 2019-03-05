@@ -1,5 +1,7 @@
 package com.befast.springboot.befastprojeto.admin.usuario;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +25,11 @@ public class UsuarioResource {
 	@PostMapping("/list")
 	public UsuarioPageResponse getAll(@RequestBody UsuarioFilter filter) throws Exception{
 		return usuarioService.list(filter);
+	}
+	
+	@PostMapping("/listvinculo/{id}")
+	public List<Usuario> getAllVinculo(@PathVariable long id) throws Exception{
+		return usuarioService.listVinculo(id);
 	}
 	
 	@PostMapping("/novo")

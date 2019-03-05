@@ -1,5 +1,7 @@
 package com.befast.springboot.befastprojeto.admin.usuario;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class UsuarioService {
 		pageResponse.setTotalPages(page.getTotalPages());
 
 		return pageResponse;
+	}
+	
+	public List<Usuario> listVinculo(Long id) {
+		
+		return usuarioRepository.listVinculo(id);		
 	}
 
 	@Transactional

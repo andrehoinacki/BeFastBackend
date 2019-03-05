@@ -50,6 +50,11 @@ public class Usuario {
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)	
 	@JoinColumn(name = "saldo_id", foreignKey = @ForeignKey(name="FK_USUARIO_SALDO"), insertable = true, updatable = true)
 	private List<Saldo> saldo;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+//	@JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name="FK_USUARIO_USUARIO"), insertable = true, updatable = true)
+	@JoinColumn(name = "vinculo_id", referencedColumnName = "id", updatable = false, insertable = false)
+	private List<Usuario> usuarios;
 
 	public Usuario() {
 		
@@ -173,6 +178,20 @@ public class Usuario {
 	 */
 	public void setSaldo(List<Saldo> saldo) {
 		this.saldo = saldo;
+	}
+	
+	/**
+	 * @return the usuarios
+	 */
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	/**
+	 * @param usuarios the usuarios to set
+	 */
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 }
