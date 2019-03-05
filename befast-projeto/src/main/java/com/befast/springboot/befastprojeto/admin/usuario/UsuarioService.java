@@ -71,4 +71,8 @@ public class UsuarioService {
 		usuarioRepository.deleteById(id);
 	}
 
+	public Usuario findByMatricula(String matricula) {
+		return usuarioRepository.findByMatricula(matricula);
+	}
+
 }

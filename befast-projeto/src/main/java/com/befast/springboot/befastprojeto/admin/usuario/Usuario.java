@@ -2,6 +2,7 @@ package com.befast.springboot.befastprojeto.admin.usuario;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 
 import com.befast.springboot.befastprojeto.admin.restricao.Restricao;
 import com.befast.springboot.befastprojeto.admin.role.Role;
+import com.befast.springboot.befastprojeto.admin.saldo.Saldo;
 
 @Entity
 public class Usuario {
@@ -39,11 +41,15 @@ public class Usuario {
 	@JoinColumn(name = "restricao_id", foreignKey = @ForeignKey(name="FK_USUARIO_RESTRICAO"), insertable = true, updatable = true)
 	private List<Restricao> restricoes;
 	
-	@Column(name="valor_calorico")
+	@Column(name="valor_calorico", columnDefinition="int default 0")
 	private Long ValorCalorico; 
 	
 	@Column(name="matricula")
 	private String matricula;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)	
+	@JoinColumn(name = "saldo_id", foreignKey = @ForeignKey(name="FK_USUARIO_SALDO"), insertable = true, updatable = true)
+	private List<Saldo> saldo;
 
 	public Usuario() {
 		
@@ -153,6 +159,20 @@ public class Usuario {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+
+	/**
+	 * @return the saldo
+	 */
+	public List<Saldo> getSaldo() {
+		return saldo;
+	}
+
+	/**
+	 * @param saldo the saldo to set
+	 */
+	public void setSaldo(List<Saldo> saldo) {
+		this.saldo = saldo;
 	}
 
 }
