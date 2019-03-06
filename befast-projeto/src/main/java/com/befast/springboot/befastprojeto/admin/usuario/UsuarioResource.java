@@ -27,7 +27,7 @@ public class UsuarioResource {
 		return usuarioService.list(filter);
 	}
 	
-	@PostMapping("/listvinculo/{id}")
+	@GetMapping("/listvinculo/{id}")
 	public List<Usuario> getAllVinculo(@PathVariable long id) throws Exception{
 		return usuarioService.listVinculo(id);
 	}
