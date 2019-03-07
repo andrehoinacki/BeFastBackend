@@ -49,7 +49,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 			String encodedString = encoder.encode(usuario.getPassword());
 			encodedString = encoder.encode(usuario.getPassword());			
 			inMemoryUserList.add(new JwtUserDetails(usuario.getId(), usuario.getUsername(),
-					encodedString, usuario.getRole().getNome()));
+					encodedString, usuario.getRole().getNome(), usuario.getSaldo()));
 		}		
 		
 				
