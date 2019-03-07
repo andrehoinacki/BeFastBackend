@@ -26,12 +26,7 @@ public class UsuarioResource {
 	public UsuarioPageResponse getAll(@RequestBody UsuarioFilter filter) throws Exception{
 		return usuarioService.list(filter);
 	}
-	
-	@GetMapping("/listvinculo/{id}")
-	public List<Usuario> getAllVinculo(@PathVariable long id) throws Exception{
-		return usuarioService.listVinculo(id);
-	}
-	
+		
 	@PostMapping("/novo")
 	public Usuario createUsuario(@RequestBody Usuario usuario) throws Exception{
 		return usuarioService.save(usuario);

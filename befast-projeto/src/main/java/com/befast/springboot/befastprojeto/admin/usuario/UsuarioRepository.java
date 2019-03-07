@@ -19,9 +19,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	"	AND 	(	:#{#filter.username} 				IS NULL OR 	lower(u.username) LIKE %:#{#filter.username}% )	"
 	)
 	Page<Usuario> list(Pageable pageable, @Param("filter") UsuarioFilter filter);
-	
-	@Query("SELECT u FROM Usuario u  WHERE u.id=:#{#id} ")
-	List<Usuario> listVinculo(long id);
 
 	@Query("SELECT u FROM Usuario u  WHERE u.username=:#{#usuario.username} ")
 	Usuario qryUniqueUsuario(Usuario usuario);

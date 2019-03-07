@@ -29,12 +29,7 @@ public class UsuarioService {
 
 		return pageResponse;
 	}
-	
-	public List<Usuario> listVinculo(Long id) {
 		
-		return usuarioRepository.listVinculo(id);		
-	}
-
 	@Transactional
 	public Usuario save(Usuario usuario) throws Exception {
 		/**
