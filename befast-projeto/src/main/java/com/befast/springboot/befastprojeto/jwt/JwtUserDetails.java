@@ -2,6 +2,7 @@ package com.befast.springboot.befastprojeto.jwt;
 
 import java.util.Collection;
 
+import com.befast.springboot.befastprojeto.admin.saldo.Saldo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -16,14 +17,15 @@ public class JwtUserDetails implements UserDetails {
 	private final String password;
 	private final String role;
 	private String token = null;
+	private Collection <Saldo> saldo;
 	// private final Collection<? extends GrantedAuthority> authorities;
 
-	public JwtUserDetails(Long id, String username, String password, String role) {
+	public JwtUserDetails(Long id, String username, String password, String role, Collection<Saldo> saldos) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
-
+		this.saldo = saldos;
 		// List<SimpleGrantedAuthority> authorities = new
 		// ArrayList<SimpleGrantedAuthority>();
 		// authorities.add(new SimpleGrantedAuthority(roles));
@@ -95,6 +97,20 @@ public class JwtUserDetails implements UserDetails {
 	 */
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	/**
+	 * @return the saldo
+	 */
+	public Collection<Saldo> getSaldo() {
+		return saldo;
+	}
+
+	/**
+	 * @param saldo the saldo to set
+	 */
+	public void setSaldo(Collection<Saldo> saldo) {
+		this.saldo = saldo;
 	}
 
 }
