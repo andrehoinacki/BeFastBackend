@@ -1,7 +1,5 @@
 package com.befast.springboot.befastprojeto.venda;
 
-
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -17,6 +15,7 @@ import javax.persistence.OneToOne;
 
 import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
 import com.befast.springboot.befastprojeto.venda.pagamento.FormaPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -30,11 +29,13 @@ abstract public class Transacao {
 	@Column(name="data_venda")
 	Date dataVenda;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})	
 	@JoinColumn(name = "funcionario_id", foreignKey = @ForeignKey(name="FK_TRANSACAO_USUARIO"), insertable = true, updatable = true)		
 	Usuario funcionario;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})	
 	@JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="FK_TRANSACAO_USUARIO"), insertable = true, updatable = true)
 	Usuario cliente;
 	

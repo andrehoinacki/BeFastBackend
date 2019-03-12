@@ -78,6 +78,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.authorizeRequests().antMatchers("/venda/pagamento/**").hasAnyRole("ADMIN","FUNCIONARIO")
 				.and()
+				.authorizeRequests().antMatchers("/relatorio/**").hasRole("ADMIN")
+				.and()
 				.authorizeRequests().antMatchers("/authenticate/**").permitAll()
 				.and()
 				.authorizeRequests().antMatchers("/welcome/**").permitAll();
