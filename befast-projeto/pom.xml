@@ -50,6 +50,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jrimum</groupId>
+		        <artifactId>jrimum-bopepo</artifactId>
+			<version>0.2.3-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -75,6 +80,13 @@
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
+			<repository>
+				<id>jrimum.org</id>
+				<url>http://jrimum.org/maven/content/groups/public/</url>
+				<snapshots>
+					<enabled>true</enabled>
+				</snapshots>
+			</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
