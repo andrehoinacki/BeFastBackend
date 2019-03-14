@@ -6,6 +6,7 @@ public class VendasFilter {
  
 	private Date dataInicial;
 	private Date dataFinal;
+	private Long idCliente;
     int pageNumber = 1;
 	int pageSize = 10;
 
@@ -63,6 +64,20 @@ public class VendasFilter {
 	 */
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
+	}
+
+	/**
+	 * @return the idCliente
+	 */
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	/**
+	 * @param idCliente the idCliente to set
+	 */
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 }
