@@ -62,4 +62,8 @@ public class ProdutoService {
 		produtoRepository.deleteById(id);
 	}
 
+	public Produto findByCodigo(String codigo) {
+		return produtoRepository.getByCodigo(codigo);
+	}
+
 }

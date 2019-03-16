@@ -22,4 +22,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
 	@Query("SELECT p FROM Produto p  WHERE p.id=:#{#id} ")
 	Produto findProdutoById(long id);
+
+	@Query("SELECT p FROM Produto p  WHERE p.codigo=:#{#codigo} ")
+	Produto getByCodigo(String codigo);
 }

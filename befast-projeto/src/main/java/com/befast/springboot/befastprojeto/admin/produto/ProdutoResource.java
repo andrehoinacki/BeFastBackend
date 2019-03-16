@@ -35,6 +35,11 @@ public class ProdutoResource {
 		return produtoService.findById(id);
 	}
 
+	@GetMapping("/bycodigo/{codigo}")
+	public Produto getProdutoByCodigo(@PathVariable String codigo){
+		return produtoService.findByCodigo(codigo);
+	}
+
 	@PutMapping("/edit")
 	public Produto updateProduto(@RequestBody Produto produto) throws Exception{
 		return produtoService.save(produto);
