@@ -2,27 +2,30 @@ package com.befast.springboot.befastprojeto.venda;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
-import com.befast.springboot.befastprojeto.admin.produto.Produto;
-
 @Entity
-public class Venda extends Transacao{
+public class Venda extends Transacao {
 	
-	@ManyToMany(fetch = FetchType.EAGER)	
-	@JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name="FK_VENDA_PRODUTO"), insertable = true, updatable = true)
-	private List<Produto> itens;
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)	
+	@JoinColumn(name = "item_id", foreignKey = @ForeignKey(name="FK_VENDA_ITEM"), insertable = true, updatable = true)
+	private List<ItemVenda> itens;
 
-	public List<Produto> getItens() {
+	public List<ItemVenda> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<Produto> itens) {
+	public void setItens(List<ItemVenda> itens) {
 		this.itens = itens;
 	}
+
+	@Column(name="total")
+	private Float total;
 	
 }

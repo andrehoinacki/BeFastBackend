@@ -42,6 +42,11 @@ public class UsuarioResource {
 		return usuarioService.findByMatricula(matricula);
 	}
 
+	@GetMapping("/byusername/{username}")
+	public Usuario getUsuarioByUsername(@PathVariable String username){
+		return usuarioService.getUsuarioByUsername(username);
+	}
+
 	@PutMapping("/edit")
 	public Usuario updateUsuario(@RequestBody Usuario usuario) throws Exception{
 		return usuarioService.save(usuario);

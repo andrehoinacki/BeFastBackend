@@ -77,4 +77,12 @@ public class UsuarioService {
 		return usuarioRepository.findByMatricula(matricula);
 	}
 
+	public Usuario getUsuarioByUsername(String username) {
+		List<Usuario> user = usuarioRepository.findByUsername(username);
+		if(user !=null && user.size() > 0) {
+			return user.get(0);
+		}
+		return null;
+	}
+
 }
