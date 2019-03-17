@@ -4,6 +4,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.befast.springboot.befastprojeto.venda.boleto.GerarBoletoUsuario;
+
 @Service
 public class VendaCreditoService {
 			
@@ -15,7 +17,7 @@ public class VendaCreditoService {
 		if (valor > 0) {
 			throw new Exception("ERROR_CAMPOS_OBRIGATORIOS");
 		}
-		new GerarBoletoUsuario().gerarBoleto(valor);		
+//		new GerarBoletoUsuario().gerarBoleto(valor);		
 		return true;
 	}
 

@@ -1,8 +1,10 @@
-package com.befast.springboot.befastprojeto.admin.saldo;
+package com.befast.springboot.befastprojeto.venda.boleto;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -21,6 +23,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
+
+import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
 
 /**
  * <p>
@@ -41,7 +45,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
  */
 public class GerarBoletoUsuario {
 
-	public void gerarBoleto(float valor) {
+	public String gerarBoleto(float valor, Usuario user) {
 
 		/*
 		 * INFORMANDO DADOS SOBRE O CEDENTE.
@@ -51,7 +55,7 @@ public class GerarBoletoUsuario {
 		/*
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 */
-		Sacado sacado = new Sacado("André Luís Hoinacki Loureiro", "222.222.222-22");
+		Sacado sacado = new Sacado(user.getNome(), "222.222.222-22");
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
@@ -92,7 +96,7 @@ public class GerarBoletoUsuario {
 		titulo.setNumeroDoDocumento("123456");
 		titulo.setNossoNumero("99345678912");
 		titulo.setDigitoDoNossoNumero("5");
-		titulo.setValor(BigDecimal.valueOf(0.23));
+		titulo.setValor(BigDecimal.valueOf(valor));
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
@@ -112,6 +116,10 @@ public class GerarBoletoUsuario {
 		boleto.setInstrucaoAoSacado(
 				"Inserir texto aqui!");		
 		boleto.setInstrucao4("PARA PAGAMENTO até 30 após vencimentos COBRAR O VALOR DE: R$ 01,00");
+		
+		String dataFormatada = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+		
+		String nomeBoleto = user.getMatricula() + "_" + dataFormatada + ".pdf";
 
 		/*
 		 * GERANDO O BOLETO BANCÁRIO.
@@ -119,15 +127,13 @@ public class GerarBoletoUsuario {
 		// Instanciando um objeto "BoletoViewer", classe responsável pela
 		// geração do boleto bancário.
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
+	
+		String diretorio = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+//		String diretorio = "C:/temp/";
+		
+		File arquivoPdf = boletoViewer.getPdfAsFile(diretorio + nomeBoleto);
 
-		// Gerando o arquivo. No caso o arquivo mencionado será salvo na mesma
-		// pasta do projeto. Outros exemplos:
-		// WINDOWS: boletoViewer.getAsPDF("C:/Temp/MeuBoleto.pdf");
-		// LINUX: boletoViewer.getAsPDF("/home/temp/MeuBoleto.pdf");
-		File arquivoPdf = boletoViewer.getPdfAsFile("C:/temp/MeuBoleto.pdf");
-
-		// Mostrando o boleto gerado na tela.
-//		mostreBoletoNaTela(arquivoPdf);
+		return diretorio+nomeBoleto;
 	}
 
 	/**

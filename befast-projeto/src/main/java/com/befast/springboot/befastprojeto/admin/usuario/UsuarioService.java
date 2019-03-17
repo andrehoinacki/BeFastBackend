@@ -1,5 +1,7 @@
 package com.befast.springboot.befastprojeto.admin.usuario;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,7 +31,7 @@ public class UsuarioService {
 
 		return pageResponse;
 	}
-		
+
 	@Transactional
 	public Usuario save(Usuario usuario) throws Exception {
 		/**
@@ -79,10 +81,24 @@ public class UsuarioService {
 
 	public Usuario getUsuarioByUsername(String username) {
 		List<Usuario> user = usuarioRepository.findByUsername(username);
-		if(user !=null && user.size() > 0) {
+		if (user != null && user.size() > 0) {
 			return user.get(0);
 		}
 		return null;
+	}
+
+	public String gerarCriptografia(String senha) {
+		try {
+			String s="Texto de Exemplo";
+			MessageDigest m=MessageDigest.getInstance("MD5");
+			m.update(s.getBytes(),0,s.length());
+			String senhaCriptografada = new BigInteger(1,m.digest()).toString(16);;
+			System.out.println(senhaCriptografada);
+       		return senhaCriptografada;  	
+		}catch (Exception e) {			
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
