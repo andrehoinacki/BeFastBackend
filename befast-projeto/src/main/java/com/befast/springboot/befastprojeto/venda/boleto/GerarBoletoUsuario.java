@@ -128,8 +128,8 @@ public class GerarBoletoUsuario {
 		// geração do boleto bancário.
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
 	
-		String diretorio = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-//		String diretorio = "C:/temp/";
+//		String diretorio = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+		String diretorio = "C:/temp/";
 		
 		File arquivoPdf = boletoViewer.getPdfAsFile(diretorio + nomeBoleto);
 

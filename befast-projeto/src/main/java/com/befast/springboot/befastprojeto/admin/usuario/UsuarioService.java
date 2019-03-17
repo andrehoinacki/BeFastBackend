@@ -55,7 +55,7 @@ public class UsuarioService {
 		/**
 		 * Criptografa senha
 		 */
-		usuario.setPassword(this.generateCryptedPassword(usuario.getPassword()));
+		usuario.setPassword((usuario.getPassword()));
 		return usuarioRepository.save(usuario);
 	}
 
@@ -88,10 +88,9 @@ public class UsuarioService {
 	}
 
 	public String gerarCriptografia(String senha) {
-		try {
-			String s="Texto de Exemplo";
+		try {			
 			MessageDigest m=MessageDigest.getInstance("MD5");
-			m.update(s.getBytes(),0,s.length());
+			m.update(senha.getBytes(),0,senha.length());
 			String senhaCriptografada = new BigInteger(1,m.digest()).toString(16);;
 			System.out.println(senhaCriptografada);
        		return senhaCriptografada;  	

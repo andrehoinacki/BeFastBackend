@@ -3,6 +3,8 @@ package com.befast.springboot.befastprojeto.venda.boleto;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.befast.springboot.befastprojeto.admin.saldo.Saldo;
 import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
 import com.befast.springboot.befastprojeto.admin.usuario.UsuarioService;
 
@@ -35,11 +38,26 @@ public class GerarBoletoResource {
 		Usuario user = usuarioService.findByMatricula(matricula);
 				
 		GerarBoletoUsuario gerarBoleto = new GerarBoletoUsuario();
-		String filename = gerarBoleto.gerarBoleto(valor, user);
-		System.out.println(filename);
+		String filename = ""; 
+		try {
+			filename = gerarBoleto.gerarBoleto(valor, user);
+			System.out.println(filename);
 		
-		res.setHeader("Content-Disposition", "attachment; filename=" + filename);
-		res.getOutputStream().write(contentOf(filename));
+			res.setHeader("Content-Disposition", "attachment; filename=" + filename);
+			res.getOutputStream().write(contentOf(filename));
+			
+			Saldo saldo = new Saldo();
+			saldo.setCredito(valor);
+			saldo.setStatus("Pendente");
+			List<Saldo> list = new ArrayList<>();
+			list.add(saldo);
+			user.setSaldo(list);
+			
+			usuarioService.save(user);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
