@@ -28,4 +28,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	@Query("SELECT u FROM Usuario u  WHERE u.matricula=:#{#matricula} ")
 	Usuario findByMatricula(String matricula);
+	
+	@Query("SELECT u FROM Usuario u  ")
+	List<Usuario> findByStatusSaldo();
 }

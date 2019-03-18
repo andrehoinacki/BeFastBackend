@@ -93,7 +93,7 @@ public class GerarBoletoUsuario {
 		contaBancaria.setAgencia(new Agencia(1234, "1"));
 
 		Titulo titulo = new Titulo(contaBancaria, sacado, cedente, sacadorAvalista);
-		titulo.setNumeroDoDocumento("123456");
+		titulo.setNumeroDoDocumento(user.getSaldo().get(0).getId().toString());
 		titulo.setNossoNumero("99345678912");
 		titulo.setDigitoDoNossoNumero("5");
 		titulo.setValor(BigDecimal.valueOf(valor));

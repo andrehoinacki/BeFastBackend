@@ -86,6 +86,10 @@ public class UsuarioService {
 		}
 		return null;
 	}
+	
+	public List<Usuario> findByStatusSaldo() {
+		return usuarioRepository.findByStatusSaldo();
+	}
 
 	public String gerarCriptografia(String senha) {
 		try {			

@@ -40,12 +40,6 @@ public class GerarBoletoResource {
 		GerarBoletoUsuario gerarBoleto = new GerarBoletoUsuario();
 		String filename = ""; 
 		try {
-			filename = gerarBoleto.gerarBoleto(valor, user);
-			System.out.println(filename);
-		
-			res.setHeader("Content-Disposition", "attachment; filename=" + filename);
-			res.getOutputStream().write(contentOf(filename));
-			
 			Saldo saldo = new Saldo();
 			saldo.setCredito(valor);
 			saldo.setStatus("Pendente");
@@ -53,7 +47,15 @@ public class GerarBoletoResource {
 			list.add(saldo);
 			user.setSaldo(list);
 			
-			usuarioService.save(user);
+			user = usuarioService.save(user);
+			
+			filename = gerarBoleto.gerarBoleto(valor, user);
+			System.out.println(filename);
+		
+			res.setHeader("Content-Disposition", "attachment; filename=" + filename);
+			res.getOutputStream().write(contentOf(filename));
+			
+			
 				
 		} catch (Exception e) {
 			e.printStackTrace();
