@@ -17,6 +17,9 @@ public class Venda extends Transacao {
 	@JoinColumn(name = "item_id", foreignKey = @ForeignKey(name="FK_VENDA_ITEM"), insertable = true, updatable = true)
 	private List<ItemVenda> itens;
 
+	@Column(name="total")
+	private Float total;
+
 	public List<ItemVenda> getItens() {
 		return itens;
 	}
@@ -25,7 +28,19 @@ public class Venda extends Transacao {
 		this.itens = itens;
 	}
 
-	@Column(name="total")
-	private Float total;
+	/**
+	 * @return the total
+	 */
+	public Float getTotal() {
+		return total;
+	}
+
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+
 	
 }

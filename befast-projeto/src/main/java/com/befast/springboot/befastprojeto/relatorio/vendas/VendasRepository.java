@@ -19,4 +19,11 @@ public interface VendasRepository extends JpaRepository<Venda, Long>{
 	"	AND 	(	:#{#filter.idCliente} 				IS NULL OR 	lower(v.cliente.id) = :#{#filter.idCliente} )	"
 	)
 	Page<Venda> list(Pageable pageable, @Param("filter") VendasFilter filter);
+
+/* 	@Query(	"SELECT new com.befast.springboot.befastprojeto.relatorio.vendas.VendasVO() FROM Venda v															" +
+	"WHERE 																					" +
+	"			v.dataVenda BETWEEN :#{#filter.dataInicial} AND :#{#filter.dataFinal}		" +
+	"	AND 	(	:#{#filter.idCliente} 				IS NULL OR 	lower(v.cliente.id) = :#{#filter.idCliente} )	"
+	)
+	Page<VendaVO> listVO(Pageable pageable, @Param("filter") VendasFilter filter); */
 }
