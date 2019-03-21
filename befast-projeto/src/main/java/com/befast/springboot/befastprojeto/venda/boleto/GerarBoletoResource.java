@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,7 @@ public class GerarBoletoResource {
 			Saldo saldo = new Saldo();
 			saldo.setCredito(valor);
 			saldo.setStatus("Pendente");
+			saldo.setData(new Date());
 			List<Saldo> list = new ArrayList<>();
 			list.add(saldo);
 			user.setSaldo(list);
