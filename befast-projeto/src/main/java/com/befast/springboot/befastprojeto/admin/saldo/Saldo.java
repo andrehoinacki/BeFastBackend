@@ -1,9 +1,16 @@
 package com.befast.springboot.befastprojeto.admin.saldo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 @Entity
 public class Saldo {
@@ -18,6 +25,9 @@ public class Saldo {
     @Column(name = "status")
     private String status;
     
+    @Column(name = "data", columnDefinition = "DATETIME NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date data;
+
     /**
      * @return the id
      */
@@ -58,6 +68,20 @@ public class Saldo {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the data
+     */
+    public Date getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Date data) {
+        this.data = data;
     }
 
 }

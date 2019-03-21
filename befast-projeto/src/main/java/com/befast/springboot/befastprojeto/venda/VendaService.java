@@ -34,7 +34,11 @@ public class VendaService {
 		/**
 		 * Valida campos obrigatórios
 		 */
-		if (venda.getCliente() == null || venda.getFuncionario() == null ) {
+		if (venda.getCliente() == null 
+			|| venda.getFuncionario() == null 
+			|| venda.getItens().size() <= 0 
+			|| venda.pagamento == null) {
+				
 			throw new Exception("ERROR_CAMPOS_OBRIGATORIOS");
 		}
 		Venda vendaRetorno = vendaRepository.save(venda);
