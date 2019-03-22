@@ -34,6 +34,7 @@ public class UsuarioService {
 
 	@Transactional
 	public Usuario save(Usuario usuario) throws Exception {
+		String senha = "";
 		/**
 		 * Valida campos obrigatórios
 		 */
@@ -50,12 +51,14 @@ public class UsuarioService {
 			if (unique != null && !unique.getId().equals(usuario.getId())) {
 				throw new Exception("ERROR_REGISTRO_DUPLICADO");
 			}
+			senha = usuario.getPassword();
+			senha = gerarCriptografia(senha);
 		}
 
 		/**
 		 * Criptografa senha
 		 */
-		usuario.setPassword((usuario.getPassword()));
+		usuario.setPassword(senha);
 		return usuarioRepository.save(usuario);
 	}
 
