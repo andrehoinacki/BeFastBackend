@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.befast.springboot.befastprojeto.admin.usuario.UsuarioService;
 import com.befast.springboot.befastprojeto.jwt.JwtTokenUtil;
 import com.befast.springboot.befastprojeto.jwt.JwtUserDetails;
 
@@ -39,12 +40,15 @@ public class JwtAuthenticationRestController {
 
 	@Autowired
 	private UserDetailsService jwtInMemoryUserDetailsService;
+	
+	@Autowired
+	private UsuarioService userService;
 
 	@RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
 			throws AuthenticationException {
-
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		String encodedString = userService.gerarCriptografia(authenticationRequest.getPassword());		
+		authenticate(authenticationRequest.getUsername(), encodedString);
 
 		final JwtUserDetails userDetails = (JwtUserDetails) jwtInMemoryUserDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());

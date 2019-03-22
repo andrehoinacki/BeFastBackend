@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
-import com.befast.springboot.befastprojeto.admin.usuario.UsuarioController;
-
 //import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.befast.springboot.befastprojeto.admin.usuario.Usuario;
+import com.befast.springboot.befastprojeto.admin.usuario.UsuarioController;
+import com.befast.springboot.befastprojeto.admin.usuario.UsuarioService;
 
 @Service
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
@@ -26,7 +22,12 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UsuarioController userController;
 	
+	@Autowired
+	private UsuarioService userService;
+	
 	List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
+	
+	private String senhaDigitada = "";
 
 //	static {
 //		inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
@@ -46,8 +47,9 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 		if (users != null && !users.isEmpty()) {
 			usuario = users.get(0);			
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			String encodedString = encoder.encode(usuario.getPassword());
-			encodedString = encoder.encode(usuario.getPassword());			
+			String encodedString = userService.gerarCriptografia(usuario.getPassword());						
+			encodedString = encoder.encode(encodedString);	
+			
 			inMemoryUserList.add(new JwtUserDetails(usuario.getId(), usuario.getUsername(),
 					encodedString, usuario.getRole().getNome(), usuario.getSaldo()));
 		}		
@@ -63,5 +65,5 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
 		return findFirst.get();
 	}
-
+		
 }
