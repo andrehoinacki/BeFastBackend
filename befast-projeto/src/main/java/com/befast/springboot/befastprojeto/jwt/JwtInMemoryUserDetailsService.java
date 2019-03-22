@@ -47,8 +47,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 		if (users != null && !users.isEmpty()) {
 			usuario = users.get(0);			
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			String encodedString = userService.gerarCriptografia(usuario.getPassword());						
-			encodedString = encoder.encode(encodedString);	
+			String encodedString = encoder.encode(usuario.getPassword());	
 			
 			inMemoryUserList.add(new JwtUserDetails(usuario.getId(), usuario.getUsername(),
 					encodedString, usuario.getRole().getNome(), usuario.getSaldo()));
