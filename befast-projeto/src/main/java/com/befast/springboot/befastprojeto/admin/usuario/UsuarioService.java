@@ -52,13 +52,8 @@ public class UsuarioService {
 				throw new Exception("ERROR_REGISTRO_DUPLICADO");
 			}
 			senha = usuario.getPassword();
-			senha = gerarCriptografia(senha);
+			usuario.setPassword(gerarCriptografia(senha));
 		}
-
-		/**
-		 * Criptografa senha
-		 */
-		usuario.setPassword(senha);
 		return usuarioRepository.save(usuario);
 	}
 
@@ -98,8 +93,7 @@ public class UsuarioService {
 		try {			
 			MessageDigest m=MessageDigest.getInstance("MD5");
 			m.update(senha.getBytes(),0,senha.length());
-			String senhaCriptografada = new BigInteger(1,m.digest()).toString(16);;
-			System.out.println(senhaCriptografada);
+			String senhaCriptografada = new BigInteger(1,m.digest()).toString(16);
        		return senhaCriptografada;  	
 		}catch (Exception e) {			
 			e.printStackTrace();
